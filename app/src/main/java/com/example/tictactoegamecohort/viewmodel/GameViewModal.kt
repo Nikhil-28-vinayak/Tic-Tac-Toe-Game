@@ -41,17 +41,20 @@ class GameViewModal : ViewModel() {
 
         //to switch Player
         currentPlayer = if (currentPlayer == Player.X) Player.O else Player.X
+        message = if(currentPlayer == Player.X) "Turn: X" else "Turn: O"
 
 
         val winner = checkWinner()
+        val draw = isBoardFull()
 
         if (winner != null) {
             // check Win
             status = if (winner == Player.X) GameStatus.X_WON else GameStatus.O_WON
             message = if (winner == Player.X) "Player X Won" else "Player O Won"
             return
-        } else {
-            //check craw
+        }
+        if(draw) {
+            //check draw
             status = GameStatus.DRAW
             message = "Draw"
             return
